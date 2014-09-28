@@ -1,7 +1,3 @@
-var array = [4,5,2,1,3,7,6,9,8];
-console.log('Sorting array: ' + array);
-console.log('----------------------');
-
 function mergeSort(leftArray, rightArray) {
     console.log('Sorting: ' + leftArray + ' and ' + rightArray);
     var result = [],
@@ -36,6 +32,16 @@ function merge(array) {
         return mergeSort(merge(left), merge(right));
 }
 
+var array = process.argv[2];
+
+try {
+    array = JSON.parse(array);
+} catch (err) {
+    console.log('Please use: node <file.js> <json array as string e.g "[1,2,3,4]">');
+    return;
+}
+console.log('Sorting array: ' + array);
+console.log('----------------------');
 array = merge(array);
 console.log('----------------------');
 console.log('Array sorted: ' + array);

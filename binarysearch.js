@@ -1,11 +1,3 @@
-if (isNaN(process.argv[2])) {
-    console.log(process.argv[2] + ' is not a valid number!');
-    return;
-}
-console.log('Searching for number: ' + process.argv[2]);
-
-var originialArray = [1,2,3,4,5,6,7,8,9];
-
 function binarySearch(array, number) {
     var left = 0,
         right = array.length - 1,
@@ -31,4 +23,16 @@ function binarySearch(array, number) {
         console.log('Number not found!');
 }
 
-binarySearch(originialArray, parseInt(process.argv[2]));
+try {
+    var val = parseInt(process.argv[2]),
+    array = JSON.parse(process.argv[3]);
+} catch (err) {
+    console.log('Please use: node <file.js> <number> <json array as string e.g "[1,2,3,4]">');
+    return;
+}
+
+console.log('Searching for number: ' + val);
+array.sort(function (val1, val2) {
+    return val1 - val2;
+});
+binarySearch(array, val);
